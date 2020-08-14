@@ -34,7 +34,7 @@ class Trie:
         Returns if the word is in the trie.
         """
         curr=self.root
-        for char in enumerate(word):
+        for char in (word):
             if char not in curr.children:
                 return False
             curr=curr.children[char]
@@ -46,7 +46,7 @@ class Trie:
         Returns if there is any word in the trie that starts with the given prefix.
         """
         curr=self.root
-        for char in enumerate(prefix):
+        for char in (prefix):
             if char not in curr.children:
                 return False
             curr=curr.children[char]
