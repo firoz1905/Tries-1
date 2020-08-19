@@ -1,0 +1,50 @@
+Time Complexity : O(N*L)
+Space Complexity : Overwhelming space occupied by the Tree
+Appraoch :
+class Solution(object):
+    def replaceWords(self, roots, sentence):
+        """
+        :type dict: List[str]
+        :type sentence: str
+        :rtype: str
+        """
+
+        class TrieNode(object):
+            def __init__(self):
+                self.isEnd = False
+                self.children = dict()
+
+        class Trie(object):
+            def __init__(self):
+                self.root = TrieNode()
+
+            def addWord(self, word): ##Building a Tree
+                if word:
+                    cur = self.root
+                    for c in word:
+                        if c not in cur.children:
+                            cur.children[c] = TrieNode()
+                        cur = cur.children[c]
+                    cur.isEnd = True
+
+            def findword(self, word):
+                ans = ""
+                cur = self.root
+                for c in word:
+                    if c in cur.children:
+                        ans += c
+                        cur = cur.children[c]
+                        if cur.isEnd == True:  # found smallest root!
+                            return ans
+                    else:
+                        break
+                return word
+
+        trie = Trie()
+        for word in roots:
+            trie.addWord(word)
+
+        ans = []
+        for word in sentence.split():
+            ans.append(trie.findword(word))
+        return ' '.join(ans)
